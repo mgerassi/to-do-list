@@ -1,0 +1,25 @@
+.toDoItem {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+
+
+}
+.checkboxAndText {
+    display: flex;
+    justify-content: left;
+    margin-right: 0;
+
+}
+
+#deleteItemButton {
+    font-size: 0.8em;
+    padding: 3px;
+    transition: none;
+}
+
+.toToLabel {
+    display: flex;
+    align-content: center;
+    cursor: pointer;
+}
