@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import InputForm from '../components/InputForm/InputForm';
 import ToDoList from '../components/ToDoList/ToDoList';
-
 import './App.css';
 
 class App extends Component {
@@ -9,13 +8,14 @@ class App extends Component {
     super(props);
     this.state = {
       input: '',
-      list: [
-        { text: "Eat", done: false },
-        { text: "Sleep", done: false },
-        { text: "React", done: true },
-        { text: "Repeat", done: false }
-      ]
+      list: []
     };
+  }
+
+  componentDidMount() {
+    fetch('https://api.myjson.com/bins/1b3qs9') // This is a JSON file I've stored on a remote server. See: initialList.json for content.
+      .then(resposne => resposne.json())
+      .then(initalList => { this.setState({ list: initalList }); });
   }
 
   onInputChange = (event) => {
@@ -81,6 +81,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('rendered');
     return (
       <div>
         <InputForm

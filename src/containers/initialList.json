@@ -1,0 +1,18 @@
+[
+    {
+        "text": "Eat",
+        "done": false
+    },
+    {
+        "text": "Sleep",
+        "done": false
+    },
+    {
+        "text": "React",
+        "done": true
+    },
+    {
+        "text": "Repeat",
+        "done": false
+    }
+]
