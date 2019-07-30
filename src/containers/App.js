@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import InputForm from '../components/InputForm/InputForm'
-import ToDoList from '../components/ToDoList/ToDoList'
+import InputForm from '../components/InputForm/InputForm';
+import ToDoList from '../components/ToDoList/ToDoList';
 
 import './App.css';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       input: '',
       list: [
@@ -18,20 +18,20 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
-    document.getElementById("textbox").focus();
-  }
-
   onInputChange = (event) => {
     this.setState({ input: event.target.value });
   }
 
   onButtonSubmit = () => {
     if (this.state.input !== '') {
-      this.setState({ list: this.state.list.concat({ text: this.state.input, done: false }) });
-      this.setState({ input: '' });
-      document.getElementById("textbox").value = '';
-      document.getElementById("textbox").focus();
+      this.setState({
+        list:
+          this.state.list.concat({
+            text: this.state.input,
+            done: false
+          }),
+        input: ''
+      });
     }
   }
 
@@ -46,38 +46,58 @@ class App extends Component {
             return item;
           }
         })
-    })
+    });
   }
 
   onDeleteClick = (indexToRemove) => {
-    this.setState({ list: this.state.list.filter((item, index) => index !== indexToRemove) });
+    this.setState({
+      list:
+        this.state.list.filter((item, index) =>
+          index !== indexToRemove)
+    });
   };
 
   onDeleteDone = () => {
-    this.setState({ list: this.state.list.filter(item => item.done === false) });
+    this.setState({
+      list:
+        this.state.list.filter(item =>
+          item.done === false)
+    });
   };
 
   onDeleteAll = () => {
     this.setState({ list: [] });
   }
 
-  onToggleSelectAll = (isChecked) => {
+  onToggleSelectAll = (event) => {
+    const isChecked = event.target.checked;
     this.setState({
-      list: this.state.list.map(item => {
-        item.done = isChecked;
-        return item;
-      })
+      list:
+        this.state.list.map(item => {
+          item.done = isChecked;
+          return item;
+        })
     });
   }
 
   render() {
     return (
       <div>
-        <InputForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}
-          onToggleSelectAll={this.onToggleSelectAll} onDeleteDone={this.onDeleteDone} onDeleteAll={this.onDeleteAll} />
-        <ToDoList toDoList={this.state.list} onCheckboxClick={this.onCheckboxClick} onDeleteClick={this.onDeleteClick} />
+        <InputForm
+          input={this.state.input}
+          onInputChange={this.onInputChange}
+          onButtonSubmit={this.onButtonSubmit}
+          onToggleSelectAll={this.onToggleSelectAll}
+          onDeleteDone={this.onDeleteDone}
+          onDeleteAll={this.onDeleteAll}
+        />
+        <ToDoList
+          toDoList={this.state.list}
+          onCheckboxClick={this.onCheckboxClick}
+          onDeleteClick={this.onDeleteClick}
+        />
       </div>
-    )
+    );
   }
 }
 
