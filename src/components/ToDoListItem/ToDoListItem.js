@@ -14,7 +14,7 @@ const ToDoListItem = ({ toDoText, isChecked, onCheckboxClick, onDeleteClick }) =
                     />
                     {isChecked
                         ? <strike>{toDoText}</strike>
-                        : <div>{toDoText}</div>
+                        : <span>{toDoText}</span>
                     }
                 </label>
             </div>
@@ -22,7 +22,7 @@ const ToDoListItem = ({ toDoText, isChecked, onCheckboxClick, onDeleteClick }) =
                 className="button"
                 id='deleteItemButton'
                 onClick={onDeleteClick}
-            >Delete</button>
+            >{"Delete"}</button>
         </div>
     );
 };
