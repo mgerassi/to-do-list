@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import InputForm from '../components/InputForm/InputForm';
 import ToDoList from '../components/ToDoList/ToDoList';
+import ItemCounter from '../components/ItemCounter/ItemCounter';
 import './App.css';
 
 class App extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -81,7 +83,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('rendered');
     return (
       <div>
         <InputForm
@@ -96,6 +97,9 @@ class App extends Component {
           toDoList={this.state.list}
           onCheckboxClick={this.onCheckboxClick}
           onDeleteClick={this.onDeleteClick}
+        />
+        <ItemCounter
+          listLength={this.state.list.length} 
         />
       </div>
     );
