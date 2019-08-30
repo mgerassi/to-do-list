@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ToDoListItem from '../ToDoListItem/ToDoListItem';
 import uuid from 'uuid';
-
 import './ToDoList.css';
 
 const ToDoList = ({ toDoList, onCheckboxClick, onDeleteClick }) => {

@@ -5,7 +5,7 @@ import './InputForm.css';
 const InputForm = ({ input, onInputChange, onButtonSubmit, onToggleSelectAll, onDeleteDone, onDeleteAll }) => {
 
     const handleKeyPress = (event) => {
-        if (event.keyCode === 13) {
+        if (event.keyCode === 13) { // 'Enter' key
             onButtonSubmit();
         }
     };

@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './ItemCounter.css';
 
 class ItemCounter extends Component {
 
     shouldComponentUpdate(nextProps) {
-        // console.log('shouldComponentUpdate(nextProps)');
-        // console.log('nextProps.listLength', nextProps.listLength);
-        // console.log('this.props.listLength', this.props.listLength);
-        return nextProps.listLength !== this.props.listLength;
+        return nextProps.listLength !== this.props.listLength || nextProps.remainingItemsCount !== this.props.uncheckedItemsCount;
     }
 
     render() {
-        // console.log('RENDERED');
         return (
-            <div className="center">
-                <h3>{`Total Number of List Items: ${this.props.listLength}`}</h3>
+            <div className="center counter">
+                <h3>{`To-Do Items | Total: ${this.props.listLength}, Remaining: ${this.props.uncheckedItemsCount}`}</h3>
             </div>
         );
 
@@ -22,7 +19,8 @@ class ItemCounter extends Component {
 }
 
 ItemCounter.propTypes = {
-    listLength: PropTypes.number
+    listLength: PropTypes.number,
+    remainingItemsCount: PropTypes.number
 };
 
 export default ItemCounter;

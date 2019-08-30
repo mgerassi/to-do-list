@@ -6,9 +6,8 @@
     border: 1px solid antiquewhite ;
     border-radius: 25px;
     padding: 20px;
+    padding-bottom:60px;
     margin: 20px;
     background-color: rgba(250, 235, 215, 0.5);
-    overflow: scroll;
-
-    
+    overflow: auto;    
 }

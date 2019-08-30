@@ -10,14 +10,15 @@ class App extends Component {
     super(props);
     this.state = {
       input: '',
-      list: []
+      list: [],
+      uncheckedItemsCount: 0
     };
   }
 
   componentDidMount() {
-    fetch('https://api.myjson.com/bins/1b3qs9') // This is a JSON file I've stored on a remote server. See: initialList.json for content.
+    fetch('https://api.myjson.com/bins/1b3qs9') // This is a JSON file I've stored on a remote server. See: src/containers/initialList.json
       .then(resposne => resposne.json())
-      .then(initalList => { this.setState({ list: initalList }); });
+      .then(initalList => { this.setState({ list: initalList }, this.updateUncheckedItemsCount); });
   }
 
   onInputChange = (event) => {
@@ -33,7 +34,7 @@ class App extends Component {
             done: false
           }),
         input: ''
-      });
+      }, this.updateUncheckedItemsCount);
     }
   }
 
@@ -43,12 +44,10 @@ class App extends Component {
         this.state.list.map((item, index) => {
           if (index === indexToToggle) {
             item.done = !item.done;
-            return item;
-          } else {
-            return item;
           }
+          return item;
         })
-    });
+    }, this.updateUncheckedItemsCount);
   }
 
   onDeleteClick = (indexToRemove) => {
@@ -56,7 +55,7 @@ class App extends Component {
       list:
         this.state.list.filter((item, index) =>
           index !== indexToRemove)
-    });
+    }, this.updateUncheckedItemsCount);
   };
 
   onDeleteDone = () => {
@@ -64,11 +63,11 @@ class App extends Component {
       list:
         this.state.list.filter(item =>
           item.done === false)
-    });
+    }, this.updateUncheckedItemsCount);
   };
 
   onDeleteAll = () => {
-    this.setState({ list: [] });
+    this.setState({ list: [] }, this.updateUncheckedItemsCount);
   }
 
   onToggleSelectAll = (event) => {
@@ -79,6 +78,14 @@ class App extends Component {
           item.done = isChecked;
           return item;
         })
+    }, this.updateUncheckedItemsCount);
+  }
+
+  updateUncheckedItemsCount = () => {
+    this.setState({
+      uncheckedItemsCount:
+        this.state.list.filter(item =>
+          item.done === false).length
     });
   }
 
@@ -99,7 +106,8 @@ class App extends Component {
           onDeleteClick={this.onDeleteClick}
         />
         <ItemCounter
-          listLength={this.state.list.length} 
+          listLength={this.state.list.length}
+          uncheckedItemsCount={this.state.uncheckedItemsCount}
         />
       </div>
     );
